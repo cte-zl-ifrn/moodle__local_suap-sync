@@ -9,3 +9,4 @@ tag:
     stage: versioning
     only:
         - proximo
+
