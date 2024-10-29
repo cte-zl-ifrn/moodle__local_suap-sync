@@ -4,3 +4,8 @@ include:
     ref: "main"
     file:
       - "templates/lms-autodeploy.yml"
+
+tag:
+    stage: versioning
+    only:
+        - proximo
