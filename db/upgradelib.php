@@ -83,6 +83,9 @@ function suap_bulk_course_custom_field()
     suap_save_course_custom_field($cid, 'disciplina_tipo', 'Tipo da disciplina');
     suap_save_course_custom_field($cid, 'disciplina_optativo', 'Optativo da disciplina');
     suap_save_course_custom_field($cid, 'disciplina_qtd_avaliacoes', 'Quantidade de avaliações da disciplina');
+
+    suap_save_course_custom_field($cid, 'carga_horaria', 'Carga horária');
+    suap_save_course_custom_field($cid, 'tem_certificado', 'Tem certificado', 'checkbox');
 }
 
 
