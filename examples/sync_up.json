@@ -1,0 +1,138 @@
+{
+  "users": [
+    {
+      "idnumber": "idnumber",
+      "firstname": "firstname",
+      "lastname": "lastname",
+      "username": "username",
+      "email": "",
+      "auth": "",
+      "password": "",
+      "phone1": "",
+      "phone2": "",
+      "institution": "",
+      "department": "",
+      "address": "",
+      "city": "",
+      "country": "",
+      "lang": "",
+      "calendartype": "",
+      "theme": "",
+      "timezone": "",
+      "confirmed": 0,
+      "suspended": 0,
+      "profile_customfield1": "profile_customfield1",
+      "active": false,
+      "insert_only": [
+        "idnumber",
+        "lang",
+        "calendartype",
+        "theme",
+        "timezone"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "idnumber": 1,
+      "name": "",
+      "description": "",
+      "descriptionformat": 0,
+      "visible": 1,
+      "theme": "",
+      "categories": [
+        {
+          "idnumber": 1,
+          "name": "",
+          "categories": [
+            {
+              "idnumber": 1,
+              "name": "",
+              "courses": [
+                {
+                  "idnumber": 1,
+                  "fullname": "",
+                  "shortname": "",
+                  "summary": "",
+                  "summaryformat": 0,
+                  "format": "topics",
+                  "showgrades": 0,
+                  "startdate": 0,
+                  "enddate": 0,
+                  "relativedatesmode": 0,
+                  "marker": 0,
+                  "maxbytes": 0,
+                  "showreports": 0,
+                  "visible": 0,
+                  "downloadcontent": 0,
+                  "groupmodeforce": 0,
+                  "defaultgroupingid": 0,
+                  "lang": "topics",
+                  "calendartype": "topics",
+                  "theme": "topics",
+                  "requested": 0,
+                  "enablecompletion": 0,
+                  "completionnotify": 0,
+                  "cacherev": 0,
+                  "showactivitydates": 0,
+                  "showcompletionconditions": 0,
+                  "pdfexportfont": "topics",
+                  "customfield1": "profile_customfield1",
+                  "groups": [
+                    {
+                      "idnumber": "",
+                      "name": "",
+                      "description": "",
+                      "descriptionformat": 0,
+                      "users": [
+                        "idnumber1",
+                        "idnumber2"
+                      ]
+                    }
+                  ],
+                  "assingments": [
+                    {
+                      "idnumber": "",
+                      "roles_shortname": [
+                        "shortname1",
+                        "shortname2"
+                      ]
+                    }
+                  ],
+                  "cohorts": [
+                    {
+                      "idnumber": "",
+                      "roles_shortname": [
+                        "shortname1",
+                        "shortname2"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "idnumber": 1,
+          "name": "",
+          "description": ""
+        }
+      ]
+    }
+  ],
+  "cohorts": [
+    {
+      "idnumber": "",
+      "name": "",
+      "description": "",
+      "theme": "",
+      "descriptionformat": 0,
+      "visible": 0,
+      "users": [
+        "idnumber1",
+        "idnumber2"
+      ]
+    }
+  ]
+}
