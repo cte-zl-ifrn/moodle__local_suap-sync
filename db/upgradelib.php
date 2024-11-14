@@ -131,15 +131,48 @@ function local_suap_migrate($oldversion)
 
     $dbman = $DB->get_manager();
 
-    if ($oldversion <= 20231900042) {
-        $table = new xmldb_table("suap_enrolment_to_sync");
-        $table->add_field("id",             XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE,  null, null, null);
-        $table->add_field("json",           XMLDB_TYPE_TEXT,    'medium',   XMLDB_UNSIGNED, null,          null,            null, null, null);
-        $table->add_field("timecreated",    XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
-        $table->add_field("processed",      XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+    $suap_enrolment_to_sync = new xmldb_table("suap_enrolment_to_sync");
+    $suap_enrolment_to_sync->add_field("id",             XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE,  null, null, null);
+    $suap_enrolment_to_sync->add_field("json",           XMLDB_TYPE_TEXT,    'medium',   XMLDB_UNSIGNED, null,          null,            null, null, null);
+    $suap_enrolment_to_sync->add_field("timecreated",    XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+    $suap_enrolment_to_sync->add_field("processed",      XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
 
-        $table->add_key("primary",      XMLDB_KEY_PRIMARY,  ["id"],         null,       null);
-        $status = $dbman->create_table($table);
+    $suap_enrolment_to_sync->add_key("primary",      XMLDB_KEY_PRIMARY,  ["id"],         null,       null);
+    if (!$dbman->table_exists($suap_enrolment_to_sync)) {
+        $dbman->create_table($suap_enrolment_to_sync);
     }
+
+    $suap_learning_path = new xmldb_table("suap_learning_path");
+    $suap_learning_path->add_field("id",             XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE,  null, null, null);
+    $suap_learning_path->add_field("name",           XMLDB_TYPE_CHAR,    '255',      null,           XMLDB_NOTNULL, null,            null, null, null);
+    $suap_learning_path->add_field("description",    XMLDB_TYPE_TEXT,    'medium',   XMLDB_UNSIGNED, null,          null,            null, null, null);
+    $suap_learning_path->add_field("descriptionformat", XMLDB_TYPE_INTEGER, '2',     XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+    $suap_learning_path->add_field("slug",           XMLDB_TYPE_CHAR,    '255',      null,           XMLDB_NOTNULL, null,            null, null, null);
+    $suap_learning_path->add_field("timecreated",    XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+    $suap_learning_path->add_field("timemodified",   XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+    $suap_learning_path->add_field("visible",        XMLDB_TYPE_INTEGER, '1',        XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+    $suap_learning_path->add_field("sortorder",      XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+
+    $suap_learning_path->add_key("primary",      XMLDB_KEY_PRIMARY,  ["id"],         null,       null);
+    if (!$dbman->table_exists($suap_learning_path)) {
+        $dbman->create_table($suap_learning_path);
+    }
+
+    $suap_learning_path_course = new xmldb_table("suap_learning_path_course");
+    $suap_learning_path_course->add_field("id",             XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE,  null, null, null);
+    $suap_learning_path_course->add_field("learningpathid", XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+    $suap_learning_path_course->add_field("courseid",       XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+    $suap_learning_path_course->add_field("timecreated",    XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+    $suap_learning_path_course->add_field("timemodified",   XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+    $suap_learning_path_course->add_field("visible",        XMLDB_TYPE_INTEGER, '1',        XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+    $suap_learning_path_course->add_field("sortorder",      XMLDB_TYPE_INTEGER, '10',       XMLDB_UNSIGNED, XMLDB_NOTNULL, null,            null, null, null);
+
+    $suap_learning_path_course->add_key("primary",      XMLDB_KEY_PRIMARY,  ["id"],         null,       null);
+    $suap_learning_path_course->add_key("learningpathid", XMLDB_KEY_FOREIGN, ["learningpathid"], "suap_learning_path", ["id"]);
+    $suap_learning_path_course->add_key("courseid",       XMLDB_KEY_FOREIGN, ["courseid"],       "course",            ["id"]);
+    if (!$dbman->table_exists($suap_learning_path_course)) {
+        $dbman->create_table($suap_learning_path_course);
+    }
+
     return true;
 }
