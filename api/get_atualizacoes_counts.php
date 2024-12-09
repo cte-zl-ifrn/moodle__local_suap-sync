@@ -5,7 +5,7 @@ namespace local_suap;
 require_once('../locallib.php');
 require_once("servicelib.php");
 
-class get_messages_service extends \local_suap\service{
+class get_atualizacoes_counts_service extends \local_suap\service{
 
     function do_call() {
         global $DB, $USER;
