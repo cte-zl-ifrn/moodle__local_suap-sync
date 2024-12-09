@@ -27,6 +27,7 @@ class sync_up_enrolments_service extends service {
     private $turmaCategory;
     private $context;
     private $course;
+    private $diarioIsNew = false;
     private $diario;
     private $coordenacao;
     private $isRoom;
@@ -335,6 +336,7 @@ class sync_up_enrolments_service extends service {
                 );
             }
             $this->course = create_course((object)$data);
+            $this->diarioIsNew = true;
         } elseif (!$this->isRoom) {
             $this->course->idnumber = $course_code_long;
             $this->course->shortname = $course_code_long;
@@ -460,6 +462,7 @@ class sync_up_enrolments_service extends service {
                 }
                 // $DB->insert_records("groups_members", $new_group_members);
             }
+            //
         }
     }
 
@@ -467,7 +470,7 @@ class sync_up_enrolments_service extends service {
         global $DB;
         $data = ['courseid' => $this->course->id, 'name' => $group_name];
         $group = $DB->get_record('groups', $data);
-        if (!$group) {
+        if (!$group && $this->diarioIsNew) {
             \groups_create_group((object)$data);
             $group = $DB->get_record('groups', $data);
         }
